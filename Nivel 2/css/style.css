@@ -1,0 +1,19 @@
+table{
+    width: 15%;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+
+td{
+    text-align: center;
+}
+
+
+
+.number{
+    width: 50%;
+    height: 50%;
+   
+}

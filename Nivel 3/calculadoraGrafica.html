@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue M7.1 JavaScript</title>
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="calculadora">
+        <div class="screen">
+            <input type="text" name="display" id="display">
+        </div>
+        <div class="primeraFila">
+            <input type="button" name="num7" class="btn" id="num7" value="7" onclick="displayNumeros(7)">
+            <input type="button" name="num8" class="btn" id="num8" value="8" onclick="displayNumeros(8)">
+            <input type="button" name="num9" class="btn" id="num9" value="9" onclick="displayNumeros(9)">
+            <input type="button" name="button1" class="btn" id="button1" value="/" onclick="division()">
+        </div>
+        <div class="segundaFila">
+            <input type="button" name="num4" class="btn" id="num4" value="4" onclick="displayNumeros(4)">
+            <input type="button" name="num5" class="btn" id="num5" value="5" onclick="displayNumeros(5)">
+            <input type="button" name="num6" class="btn" id="num6" value="6" onclick="displayNumeros(6)">
+            <input type="button" name="button2" class="btn" id="button2" value="*" onclick="multiplicacion()">
+        </div>
+        <div class="terceraFila">
+            <input type="button" name="num1" class="btn" id="num1" value="1" onclick="displayNumeros(1)">
+            <input type="button" name="num2" class="btn" id="num2" value="2" onclick="displayNumeros(2)">
+            <input type="button" name="num3" class="btn" id="num3" value="3" onclick="displayNumeros(3)">
+            <input type="button" name="button3" class="btn" id="button3" value="-" onclick="resta()">
+        </div>
+        <div class="cuartaFila">
+            <input type="button" name="button4" class="btn" id="button4" value="," onclick="displayComa('.')">
+            <input type="button" name="num0" class="btn" id="num0" value="0" onclick="displayNumeros(0)">
+            <input type="button" name="button5" class="btn" id="button5" value="=" onclick="resultado()">
+            <input type="button" name="button6" class="btn" id="button6" value="+" onclick="suma()">
+        </div>
+
+    </div>
+
+    <script src="script/script.js"></script>
+
+</body>
+
+</html>

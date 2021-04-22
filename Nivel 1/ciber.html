@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue M7.1 JavaScript</title>
+</head>
+<body>
+    
+    <p id="resultadoCalculadora"></p>
+
+
+    <script>
+        //Ejercicio 1
+        console.log("Hola mundo");
+
+
+        // Ejercicio 2
+        alert("Me llamo Irene");
+
+
+        // Ejercicio 3
+        var name = "Irene";
+        var lastName = "Santos";
+        console.log(name + " " + lastName);
+
+
+        // Ejercicio 4
+        var num1 = 20;
+        var num2 = 80;
+        var suma = num1 + num2;
+        console.log("La suma entre " + num1 + " y " + num2 + " es " + suma);
+
+
+        // Ejercicio 5
+        var notaExamen = prompt("Introduzca la nota del examen");
+        if (notaExamen >= 5){
+            alert("Has aprobado el examen con un " + notaExamen);
+        }else{
+            alert("Has suspendido el examen con un " + notaExamen);
+        }
+
+
+        //Ejercicio 6
+        var frase="Tinc un cotxe de color blau";
+        var remplazarColor= frase.replace("blau", "verd");
+        console.log(remplazarColor);
+        
+        var frase = "Tinc un cotxe de color blau";
+        var remplazarVocal = frase.replace(/[o]/gi,"u");
+        console.log(remplazarVocal);
+
+    
+        //Ejercicio 7
+        var objetos = ["taula", "cadira", "ordinador", "libreta"];
+
+        for (var i=0; i<objetos.length; i++){
+            console.log("L'objecte " + objetos[i] + " està a la posició " + i)
+        }
+
+
+        //Ejercicio 8
+        let valor1 = parseInt(prompt("Introduzca un número"));
+        let valor2 = parseInt(prompt("Introduzca otro número")); 
+        let operator = prompt("Introduzca un operador: +, -, *, /"); 
+        let resultado=  calculadora(operator, valor1, valor2);
+        document.getElementById("resultadoCalculadora").innerHTML = resultado;
+
+        function calculadora(operador, valor1, valor2) {
+            switch(operador){
+                case "+":
+                    return suma (valor1, valor2); 
+                break;
+                
+                case "-": 
+                    resta (valor1, valor2); 
+                break;
+
+                case "*":
+                    multiplicacion (valor1, valor2);
+                break;
+
+                default: 
+                    document.getElementById("resultadoCalculadora").innerHTML = "operador desconocido";
+                break;
+            }
+        }
+    
+    
+        function suma (param1, param2){
+            let solucion = param1 + param2;
+            return solucion;
+        }
+
+        function resta (param1, param2){
+            let solucion = num1 - num2;
+            return solucion;
+        }
+
+        function multiplicacion (param1, param2){
+            let solucion = num1 * num2;
+            return solucion;   
+        }
+
+    </script>
+</body>
+</html>
