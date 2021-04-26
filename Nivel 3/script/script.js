@@ -15,290 +15,181 @@ let firstDivision = true;
 //MOSTRAR NÚMEROS POR PANTALLA
 function displayNumeros(numero) {
     if (decimal) {
-        document.getElementById("display").value = decimal + numero;
-        decimal = document.getElementById("display").value;
+        display.value = decimal + numero;
+        decimal = display.value;
         digito = 0;
     } else {
-        document.getElementById("display").value = digito + numero;
-        digito = document.getElementById("display").value;
+        display.value = digito + numero;
+        digito = display.value;
         decimal = 0;
     }
 }
 
 function displayComa(coma) {
     decimal = digito + coma;
-    document.getElementById("display").value = digito + coma;
-    decimal = document.getElementById("display").value;
+    display.value = digito + coma;
+    decimal = display.value;
 }
 
 
+
 //OPERACIONES CALCULADORA
+function infoOperacion(vDigito, vDecimal, vSumar, vRestar, vMultiplicar, vDividir, vFirstOperation){
+    digito = vDigito;
+    decimal = vDecimal;
+    sumar = vSumar;
+    restar = vRestar;
+    multiplicar=vMultiplicar;
+    dividir=vDividir;
+    firstOperation = vFirstOperation;
+}
+
+function operacionSumar(valor){
+    if(valor === "decimal"){
+        acumulado = acumulado + parseFloat(decimal);
+    }else{
+        acumulado = acumulado + parseInt(digito);
+    }
+    display.value = acumulado;
+}
+
+
+function operacionRestar(valor){
+    if (valor === "decimal"){
+        acumulado = acumulado - parseFloat(decimal);
+    }else{
+        acumulado = acumulado - parseInt(digito);
+    }
+    display.value = acumulado;
+}
+
+
+function operacionMultiplicar(valor){
+    if(firstMultiplication == false){
+        display.value = acumulado; 
+        firstMultiplication=true;
+    }else{
+        if (valor === "decimal"){
+            acumulado = acumulado * parseFloat(decimal);
+        }else{
+            acumulado = acumulado * parseInt(digito);
+        }
+        display.value = acumulado;
+    }
+}
+
+function operacionDividir(valor){
+    if(firstDivision == false){
+        display.value = acumulado; 
+        firstDivision=true;
+    }else{
+        if (valor === "decimal"){
+            acumulado = acumulado / parseFloat(decimal);
+        }else{
+            if(digito == "0"){
+                alert("No es posible realizar esta operación");
+            }else{
+            acumulado = acumulado / parseInt(digito);
+            }
+        }
+        display.value = acumulado;
+    }
+}
+
+
 function suma() {
     if (decimal) {
-        if (restar) {
-            acumulado = acumulado - parseFloat(decimal);
-            document.getElementById("display").value = acumulado;
-        } else if (multiplicar){
-            if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstMultiplication=true;
-                } else {
-                    acumulado = acumulado * parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-        } else if(dividir){
-            if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstDivision=true;
-                } else {
-                    acumulado = acumulado / parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-        }else{
-            acumulado = acumulado + parseFloat(decimal);
-            document.getElementById("display").value = acumulado;  
-        }
+        if (restar) operacionRestar("decimal");
+        else if (multiplicar) operacionMultiplicar("decimal");
+        else if(dividir) operacionDividir("decimal");
+        else operacionSumar("decimal");  
     } else {
-        if (restar) {
-            acumulado = acumulado - parseInt(digito);
-            document.getElementById("display").value = acumulado;
-        } else if (multiplicar){
-            if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstMultiplication=true;
-                } else {
-                    acumulado = acumulado * parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-        } else if(dividir){
-            if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstDivision=true;
-                } else {
-                    acumulado = acumulado / parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-        }else{
-            acumulado = acumulado + parseInt(digito);
-            document.getElementById("display").value = acumulado;  
-        }
+        if (restar) operacionRestar(digito);
+        else if (multiplicar) operacionMultiplicar(digito);
+        else if(dividir) operacionDividir(digito);
+        else operacionSumar(digito);
     }
-
-    digito = "";
-    decimal = "";
-    sumar = true;
-    restar = false;
-    multiplicar=false;
-    dividir=false;
-    firstOperation = false;
+    infoOperacion("", "", true, false, false, false, false);
 }
 
 
 function resta() {
     if (decimal) {
         if (firstOperation == false) {
-            if (sumar == true) {
-                acumulado = acumulado + parseFloat(decimal);
-                document.getElementById("display").value = acumulado;
-            } else if (multiplicar) {
-                if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstMultiplication=true;
-                } else {
-                    acumulado = acumulado * parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else if (dividir) {
-                if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstDivision=true;
-                } else {
-                    acumulado = acumulado / parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else {
-                acumulado = acumulado - parseFloat(decimal);
-                document.getElementById("display").value = acumulado;
-            }
-    
+            if (sumar == true) operacionSumar("decimal");
+            else if (multiplicar) operacionMultiplicar("decimal");
+            else if (dividir) operacionDividir("decimal");
+            else operacionRestar("decimal");
         } else {
             acumulado = parseFloat(decimal);
             firstOperation = false;
         }
     } else {
         if (firstOperation == false) {
-            if (sumar == true) {
-                acumulado = acumulado + parseInt(digito);
-                document.getElementById("display").value = acumulado;
-            } else if (multiplicar) {
-                if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstMultiplication=true;
-                } else {
-                    acumulado = acumulado * parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else if (dividir) {
-                if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstDivision=true;
-                } else {
-                    acumulado = acumulado / parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else {
-                acumulado = acumulado - parseInt(digito);
-                document.getElementById("display").value = acumulado;
-            }
-    
+            if (sumar == true) operacionSumar(digito);
+            else if (multiplicar) operacionMultiplicar(digito);
+            else if (dividir) operacionDividir(digito);
+            else operacionRestar(digito);
         } else {
             acumulado = parseInt(digito);
             firstOperation = false;
         }
     }
-
-
-    digito = "";
-    decimal = "";
-    sumar = false;
-    multiplicar = false;
-    dividir = false;
-    restar = true;
+    infoOperacion("", "", false, true, false, false, false);
 }
 
 
 function multiplicacion() {
     if (decimal) {
         if (firstOperation == false) {
-            if (sumar == true) {
-                acumulado = acumulado + parseFloat(decimal);
-                document.getElementById("display").value = acumulado;
-            } else if (restar) {
-                acumulado = acumulado - parseFloat(decimal);
-                document.getElementById("display").value = acumulado;
-            } else if (dividir) {
-                if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                } else {
-                    acumulado = acumulado / parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else {
-                if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstMultiplication=true;
-                } else {
-                    acumulado = acumulado * parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-            }
+            if (sumar) operacionSumar("decimal");
+            else if (restar) operacionRestar("decimal");
+            else if (dividir) operacionDividir("decimal");  
+            else operacionMultiplicar("decimal");
         } else {
             acumulado = parseFloat(decimal);
             firstOperation = false;
         }
     } else {
         if (firstOperation == false) {
-            if (sumar == true) {
-                acumulado = acumulado + parseInt(digito);
-                document.getElementById("display").value = acumulado;
-            } else if (restar) {
-                acumulado = acumulado - parseInt(digito);
-                document.getElementById("display").value = acumulado;
-            } else if (dividir) {
-                if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                } else {
-                    acumulado = acumulado / parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else {
-                if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstMultiplication=true;
-                } else {
-                    acumulado = acumulado * parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-            }
+            if (sumar) operacionSumar(digito);
+            else if (restar) operacionRestar(digito);
+            else if (dividir) operacionDividir(digito); 
+            else operacionMultiplicar(digito);    
         } else {
             acumulado = parseInt(digito);
             firstOperation = false;
         }
     }
-    digito = "";
-    decimal = "";
-    sumar = false;
-    restar = false;
-    dividir = false;
-    multiplicar = true;
+
+    infoOperacion("", "", false, false, true, false, false);
 }
+
 
 function division() {
     if (decimal) {
         if (firstOperation == false) {
-            if (sumar == true) {
-                acumulado = acumulado + parseFloat(decimal);
-                document.getElementById("display").value = acumulado;
-            } else if (restar) {
-                acumulado = acumulado - parseFloat(decimal);
-                document.getElementById("display").value = acumulado;
-            } else if (multiplicar) {
-                if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                } else {
-                    acumulado = acumulado * parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else {
-                if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstDivision=true;
-                } else {
-                    acumulado = acumulado / parseFloat(decimal);
-                    document.getElementById("display").value = acumulado;
-                }
-            }
+            if (sumar == true) operacionSumar("decimal");
+            else if (restar) operacionRestar("decimal");
+            else if (multiplicar) operacionMultiplicar ("decimal"); 
+            else operacionDividir("decimal");
         } else {
             acumulado = parseFloat(decimal);
             firstOperation = false;
         }
     } else {
         if (firstOperation == false) {
-            if (sumar == true) {
-                acumulado = acumulado + parseInt(digito);
-                document.getElementById("display").value = acumulado;
-            } else if (restar) {
-                acumulado = acumulado - parseInt(digito);
-                document.getElementById("display").value = acumulado;
-            } else if (multiplicar) {
-                if (firstMultiplication == false) {
-                    document.getElementById("display").value = acumulado;
-                } else {
-                    acumulado = acumulado * parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-            } else {
-                if (firstDivision == false) {
-                    document.getElementById("display").value = acumulado;
-                    firstDivision=true;
-                } else {
-                    acumulado = acumulado / parseInt(digito);
-                    document.getElementById("display").value = acumulado;
-                }
-    
-            }
+            if (sumar == true) operacionSumar(digito);
+            else if (restar) operacionRestar(digito);            
+            else if (multiplicar) operacionMultiplicar(digito);
+            else operacionDividir(digito);
         } else {
             acumulado = parseInt(digito);
             firstOperation = false;
         }
     }
 
-    digito = "";
-    decimal = "";
-    sumar = false;
-    restar = false;
-    multiplicar = false;
-    dividir = true;
+    infoOperacion("", "", false, false, false, true, false)
 }
 
 
@@ -306,35 +197,30 @@ function division() {
 //MOSTRAR RESULTADO
 function resultado() {
     if (decimal) {
-        if (sumar == true) {
-            document.getElementById("display").value = acumulado + parseFloat(decimal);
-        } else if (restar == true) {
-            document.getElementById("display").value = acumulado - parseFloat(decimal);
-        } else if (multiplicar == true) {
-            document.getElementById("display").value = acumulado * parseFloat(decimal);
+        if (sumar == true) operacionSumar("decimal");
+        else if (restar) operacionRestar("decimal");
+        else if (multiplicar) {
+            operacionMultiplicar("decimal");
             firstMultiplication = false;
         } else {
-            document.getElementById("display").value = acumulado / parseFloat(decimal);
+            operacionDividir("decimal");
             firstDivision = false;
         }
-    
-        acumulado = parseFloat(document.getElementById("display").value);
+        acumulado = parseFloat(display.value);
         decimal = 0;
 
     } else {
-        if (sumar == true) {
-            document.getElementById("display").value = acumulado + parseInt(digito);
-        } else if (restar == true) {
-            document.getElementById("display").value = acumulado - parseInt(digito);
-        } else if (multiplicar == true) {
-            document.getElementById("display").value = acumulado * parseInt(digito);
+        if (sumar) operacionSumar(digito);
+        else if (restar) operacionRestar(digito);
+        else if (multiplicar) {
+            operacionMultiplicar(digito);
             firstMultiplication = false;
         } else {
-            document.getElementById("display").value = acumulado / parseInt(digito);
+            operacionDividir(digito);
             firstDivision = false;
         }
-    
-        acumulado = parseInt(document.getElementById("display").value);
+
+        acumulado = parseInt(display.value);
         digito = 0;
     }
 }
